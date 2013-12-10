@@ -34,7 +34,10 @@ public class Principal extends GraphicsProgram {
      * Peces que s'intercanvien.
      */
     private static final int INTERCANVIS = 30;
-
+    /**
+     * espai pel marcador.
+     */
+    private static final int ESPAIMARCADOR = 100;
     /**
      * ID del applet.
      */
@@ -45,9 +48,10 @@ public class Principal extends GraphicsProgram {
      */
     public final void run() {
         GImage tot = new GImage("oolong.jpg");
+        setSize((int) tot.getWidth(), (int) tot.getHeight() + ESPAIMARCADOR);
         Tauler t = new Tauler(tot);
         t.partirImatge(PECESHORITZONTALS, PECESVERTICALS);
-        t.pintarPesses(this);
+        t.pintarTauler(this, true);
         pause(ESPERA);
         t.barreja(INTERCANVIS);
     }

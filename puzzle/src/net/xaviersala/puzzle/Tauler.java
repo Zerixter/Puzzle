@@ -6,6 +6,7 @@ import java.util.ArrayList;
 import java.util.Random;
 
 import acm.graphics.GImage;
+import acm.graphics.GLabel;
 import acm.graphics.GPoint;
 
 /**
@@ -15,6 +16,10 @@ import acm.graphics.GPoint;
  */
 public class Tauler implements MouseListener  {
 
+    /**
+     * Posicionar el marcador.
+     */
+    private static final int POSICIOMARCADOR  = 50;
     /**
      * Llista de les peces del tauler.
      */
@@ -38,6 +43,14 @@ public class Tauler implements MouseListener  {
     private int midaPessaVertical;
 
     /**
+     * Clics del ratolí.
+     */
+    private int clics;
+    /**
+     * Ratoli label.
+     */
+    private GLabel marcador;
+    /**
      * Crea el tauler amb una imatge sense partir.
      * @param imatge Imatge del tauler
      */
@@ -46,6 +59,10 @@ public class Tauler implements MouseListener  {
         imatgePuzzle = imatge;
         midaPessaHoritzontal = (int) imatgePuzzle.getWidth();
         midaPessaVertical = (int) imatgePuzzle.getHeight();
+        clics = 0;
+        marcador = new GLabel("Número de clics",
+                imatgePuzzle.getX() + POSICIOMARCADOR,
+                imatgePuzzle.getHeight() + POSICIOMARCADOR);
     }
 
     /**
@@ -82,6 +99,7 @@ public class Tauler implements MouseListener  {
 
         // temp.setImatge(null);
        buida = pesses.size() - 1;
+       clics = 0;
     }
 
     @Override
@@ -116,6 +134,8 @@ public class Tauler implements MouseListener  {
         if (adjacents(pessaBuida, pessaPlena)) {
             pesses.get(i).setPosicio(pessaBuida);
             pesses.get(buida).setPosicio(pessaPlena);
+            clics++;
+            pintaMarcador();
         }
 
     }
@@ -144,6 +164,15 @@ public class Tauler implements MouseListener  {
                 intercanvia(r.nextInt(max), r.nextInt(max));
             }
         }
+        clics = 0;
+        pintaMarcador();
+    }
+
+    /**
+     * Pinta el marcador.
+     */
+    private void pintaMarcador() {
+        marcador.setLabel("Clics: " + clics);
     }
 
     /**
@@ -187,15 +216,22 @@ public class Tauler implements MouseListener  {
     }
 
     /**
-     * Pintar les peces en el objecte que s'ha passat.
+     * Pintar totes les peces en el objecte que hi ha en el tauler i decidir si
+     * s'ha de pintar el marcador o no.
      * @param pantalla Lloc on pintar.
+     * @param ambMarcador defineix si volem pintar el marcador o no
      */
-    public final void pintarPesses(final Principal pantalla) {
+    public final void pintarTauler(final Principal pantalla,
+            final boolean ambMarcador) {
         if (pesses.size() > 0) {
             for (Pessa pessa : pesses) {
                 if (pessa.getImatge() != null) {
                     pantalla.add(pessa.getImatge());
                 }
+            }
+
+            if (ambMarcador) {
+                pantalla.add(marcador);
             }
         }
 
