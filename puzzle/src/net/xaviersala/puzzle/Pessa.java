@@ -47,12 +47,26 @@ public class Pessa  {
     }
 
     /**
+     * Assigna l'ID. L'ID es fa servir per determinar si les peces estan
+     * ben posades o no.
+     * @param nouid identificador de peça
+     */
+    public final void setID(final int nouid) {
+        id = nouid;
+    }
+    /**
      * Amaga la imatge. Ho faig servir per la peça buida.
      */
     public final void buida() {
         imatge.setVisible(false);
     }
 
+    /**
+     * Torna a mostrar la imatge.
+     */
+    public final void emplena() {
+        imatge.setVisible(true);
+    }
     /**
      * Defineix quin és el listener que capturarà els clics del ratolí.
      * @param t objecte que rebrà els clics

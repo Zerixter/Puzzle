@@ -21,6 +21,14 @@ public class Tauler implements MouseListener  {
      */
     private static final int POSICIOMARCADOR  = 50;
     /**
+     * Marge per la miniicona.
+     */
+    private static final double MARGEPETIT = 5;
+    /**
+     * Escala del quadre petit.
+     */
+    private static final double ESCALAIMATGEPETITA = 0.25;
+    /**
      * Llista de les peces del tauler.
      */
     private ArrayList<Pessa> pesses;
@@ -33,6 +41,10 @@ public class Tauler implements MouseListener  {
      * Imatge del tauler.
      */
     private GImage imatgePuzzle;
+    /**
+     * Imatge en miniatura.
+     */
+    private GImage miniImatge;
     /**
      * Mida horitzontal de la peça.
      */
@@ -63,6 +75,10 @@ public class Tauler implements MouseListener  {
         marcador = new GLabel("Número de clics",
                 imatgePuzzle.getX() + POSICIOMARCADOR,
                 imatgePuzzle.getHeight() + POSICIOMARCADOR);
+        miniImatge = new GImage(imatgePuzzle.getImage());
+        miniImatge.scale(ESCALAIMATGEPETITA);
+        miniImatge.setLocation(imatgePuzzle.getWidth() - miniImatge.getWidth(),
+                imatgePuzzle.getHeight());
     }
 
     /**
@@ -100,6 +116,10 @@ public class Tauler implements MouseListener  {
         // temp.setImatge(null);
        buida = pesses.size() - 1;
        clics = 0;
+
+       miniImatge.setLocation(
+               imatgePuzzle.getWidth() - (miniImatge.getWidth() + MARGEPETIT),
+               temp.getPosicio().getY() + midaPessaVertical + MARGEPETIT);
     }
 
     @Override
@@ -116,7 +136,17 @@ public class Tauler implements MouseListener  {
             i++;
         }
 
+        debugPeces();
+    }
 
+    /**
+     * Mostra els ID de cada peça per poder debugar.
+     */
+    private void debugPeces() {
+        for (Pessa p: pesses) {
+            System.out.print(p.getID() + " ");
+        }
+        System.out.println();
     }
 
     /**
@@ -126,16 +156,22 @@ public class Tauler implements MouseListener  {
      */
     private void mou(final int i) {
 
-
+        if (partidaAcabada()) {
+            return;
+        }
         // Mira si es pot moure...
         GPoint pessaBuida = pesses.get(buida).getPosicio();
         GPoint pessaPlena = pesses.get(i).getPosicio();
 
         if (adjacents(pessaBuida, pessaPlena)) {
-            pesses.get(i).setPosicio(pessaBuida);
-            pesses.get(buida).setPosicio(pessaPlena);
+            // He de canviar les posicions i l'ID
+            intercanvia(buida, i);
             clics++;
             pintaMarcador();
+
+            if (partidaAcabada()) {
+                pesses.get(buida).emplena();
+            }
         }
 
     }
@@ -146,10 +182,16 @@ public class Tauler implements MouseListener  {
      * @param j posició
      */
     private void intercanvia(final int i, final int j) {
+
+        System.out.println("Canvia " + i + " " + j);
         GPoint pos = pesses.get(i).getPosicio();
+        int idDeI = pesses.get(i).getID();
 
         pesses.get(i).setPosicio(pesses.get(j).getPosicio());
+        pesses.get(i).setID(pesses.get(j).getID());
+
         pesses.get(j).setPosicio(pos);
+        pesses.get(j).setID(idDeI);
     }
 
     /**
@@ -157,6 +199,8 @@ public class Tauler implements MouseListener  {
      * @param vegades El número d'intercanvis
      */
     public final void barreja(final int vegades) {
+        debugPeces();
+
         int max = pesses.size() - 1;
         if (max > 0) {
             Random r = new Random();
@@ -166,6 +210,7 @@ public class Tauler implements MouseListener  {
         }
         clics = 0;
         pintaMarcador();
+        debugPeces();
     }
 
     /**
@@ -232,9 +277,23 @@ public class Tauler implements MouseListener  {
 
             if (ambMarcador) {
                 pantalla.add(marcador);
+                pantalla.add(miniImatge);
             }
         }
 
     }
 
+    /**
+     * @return S'ha acabat la partida?
+     */
+    public final boolean partidaAcabada() {
+        int i = 0;
+        for (Pessa p: pesses) {
+            if (i != p.getID()) {
+                return false;
+            }
+            i++;
+        }
+        return true;
+    }
 }

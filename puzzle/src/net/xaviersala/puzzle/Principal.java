@@ -25,11 +25,11 @@ public class Principal extends GraphicsProgram {
     /**
      * Peces horitzontals.
      */
-    private static final int PECESHORITZONTALS = 8;
+    private static final int PECESHORITZONTALS = 4;
     /**
      * Peces verticals.
      */
-    private static final int PECESVERTICALS = 8;
+    private static final int PECESVERTICALS = 4;
     /**
      * Peces que s'intercanvien.
      */
