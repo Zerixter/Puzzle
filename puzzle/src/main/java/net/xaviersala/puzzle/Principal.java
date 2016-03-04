@@ -49,6 +49,7 @@ public class Principal extends GraphicsProgram {
     public final void run() {
         GImage tot = new GImage("oolong.jpg");
         setSize((int) tot.getWidth(), (int) tot.getHeight() + ESPAIMARCADOR);
+
         Tauler t = new Tauler(tot);
         t.partirImatge(PECESHORITZONTALS, PECESVERTICALS);
         t.pintarTauler(this, true);

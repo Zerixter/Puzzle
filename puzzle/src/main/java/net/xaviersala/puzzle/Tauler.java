@@ -121,22 +121,7 @@ public class Tauler implements MouseListener  {
                temp.getPosicio().getY() + midaPessaVertical + MARGEPETIT);
     }
 
-    @Override
-    public final void mouseClicked(final MouseEvent e) {
-        int x = e.getX();
-        int y = e.getY();
 
-        int i = 0;
-        for (Pessa pessa : pesses) {
-            if (pessa.puntADins(x, y)) {
-                mou(i);
-                break;
-            }
-            i++;
-        }
-
-        debugPeces();
-    }
 
     /**
      * Mostra els ID de cada peça per poder debugar.
@@ -250,21 +235,6 @@ public class Tauler implements MouseListener  {
         return false;
     }
 
-    @Override
-    public void mousePressed(final MouseEvent e) {
-    }
-
-    @Override
-    public void mouseReleased(final MouseEvent e) {
-    }
-
-    @Override
-    public void mouseEntered(final MouseEvent e) {
-    }
-
-    @Override
-    public void mouseExited(final MouseEvent e) {
-    }
 
     /**
      * Pintar totes les peces en el objecte que hi ha en el tauler i decidir si
@@ -274,7 +244,7 @@ public class Tauler implements MouseListener  {
      */
     public final void pintarTauler(final Principal pantalla,
             final boolean ambMarcador) {
-        if (pesses.isEmpty()) {
+        if (!pesses.isEmpty()) {
             for (Pessa pessa : pesses) {
                 if (pessa.getImatge() != null) {
                     pantalla.add(pessa.getImatge());
@@ -301,5 +271,40 @@ public class Tauler implements MouseListener  {
             i++;
         }
         return true;
+    }
+
+    public void mousePressed(MouseEvent e) {
+
+    }
+
+    public void mouseReleased(MouseEvent e) {
+
+    }
+
+    public void mouseEntered(MouseEvent e) {
+
+
+    }
+
+    public void mouseExited(MouseEvent e) {
+
+
+    }
+
+    public void mouseClicked(MouseEvent e) {
+      int x = e.getX();
+      int y = e.getY();
+
+      int i = 0;
+      for (Pessa pessa : pesses) {
+          if (pessa.puntADins(x, y)) {
+              mou(i);
+              break;
+          }
+          i++;
+      }
+
+      debugPeces();
+
     }
 }
