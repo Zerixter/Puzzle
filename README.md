@@ -16,7 +16,7 @@ simplement fent:
 
     $ mvn package
     $ cd target
-    $ java -jar Puzzle-
+    $ java -jar Puzzle-0.0.2-SNAPSHOT.jar
 
 
 
