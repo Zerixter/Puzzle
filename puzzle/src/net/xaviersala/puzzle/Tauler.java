@@ -113,7 +113,6 @@ public class Tauler implements MouseListener  {
         // Buida la darrera peça
         temp.buida();
 
-        // temp.setImatge(null);
        buida = pesses.size() - 1;
        clics = 0;
 
@@ -141,12 +140,14 @@ public class Tauler implements MouseListener  {
 
     /**
      * Mostra els ID de cada peça per poder debugar.
+     * @return ordre dels id en el tauler
      */
-    private void debugPeces() {
+    private String debugPeces() {
+        String retorna = "";
         for (Pessa p: pesses) {
-            System.out.print(p.getID() + " ");
+            retorna = p.getID() + " ";
         }
-        System.out.println();
+        return retorna;
     }
 
     /**
@@ -180,10 +181,13 @@ public class Tauler implements MouseListener  {
      * Intercanvia les peces especificades.
      * @param i posició
      * @param j posició
+     * @return peces canviades
      */
-    private void intercanvia(final int i, final int j) {
+    private String intercanvia(final int i, final int j) {
 
-        System.out.println("Canvia " + i + " " + j);
+        String debuga = "Canvia " + pesses.get(i).getID() + " <-> "
+                                + pesses.get(i).getID();
+
         GPoint pos = pesses.get(i).getPosicio();
         int idDeI = pesses.get(i).getID();
 
@@ -192,6 +196,8 @@ public class Tauler implements MouseListener  {
 
         pesses.get(j).setPosicio(pos);
         pesses.get(j).setID(idDeI);
+
+        return debuga;
     }
 
     /**
@@ -268,7 +274,7 @@ public class Tauler implements MouseListener  {
      */
     public final void pintarTauler(final Principal pantalla,
             final boolean ambMarcador) {
-        if (pesses.size() > 0) {
+        if (pesses.isEmpty()) {
             for (Pessa pessa : pesses) {
                 if (pessa.getImatge() != null) {
                     pantalla.add(pessa.getImatge());
