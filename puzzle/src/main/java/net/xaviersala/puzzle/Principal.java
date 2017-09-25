@@ -2,7 +2,7 @@ package net.xaviersala.puzzle;
 
 import acm.graphics.GImage;
 import acm.program.GraphicsProgram;
-
+// Comentari nou
 /**
  * Programa que simula el comportament d'un tauler.
  * @author xavier
