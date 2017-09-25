@@ -6,7 +6,7 @@ import java.awt.image.CropImageFilter;
 import java.awt.image.FilteredImageSource;
 
 import acm.graphics.GImage;
-
+// Comentari en un fitxer diferent
 /**
  * Classe estàtica on hi ha funcions 'd'ajuda'.
  * @author xavier
