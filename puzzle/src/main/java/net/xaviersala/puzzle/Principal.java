@@ -47,6 +47,7 @@ public class Principal extends GraphicsProgram {
      * Executa el programa.
      */
     public final void run() {
+        int variable_nova = 0;
         GImage tot = new GImage("oolong.jpg");
         setSize((int) tot.getWidth(), (int) tot.getHeight() + ESPAIMARCADOR);
 
