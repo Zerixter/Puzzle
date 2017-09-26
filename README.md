@@ -1,8 +1,4 @@
-<<<<<<< HEAD
-Text random 2
-=======
-Text random
->>>>>>> 26072b9b40d55a3437c3bf186879967a526a6545
+Text random 1
 Trencaclosques
 ==========================
 Trencaclosques de peces desplaçables fet en Java amb la llibreria ACM
