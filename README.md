@@ -1,4 +1,4 @@
-Text random 1
+Text random 23
 Trencaclosques
 ==========================
 Trencaclosques de peces desplaçables fet en Java amb la llibreria ACM
