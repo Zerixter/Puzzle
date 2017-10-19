@@ -2,7 +2,7 @@ package net.xaviersala.puzzle;
 
 import acm.graphics.GImage;
 import acm.program.GraphicsProgram;
-
+// Comentari nou
 /**
  * Programa que simula el comportament d'un tauler.
  * @author xavier
@@ -47,6 +47,7 @@ public class Principal extends GraphicsProgram {
      * Executa el programa.
      */
     public final void run() {
+        int variable_nova = 0;
         GImage tot = new GImage("oolong.jpg");
         setSize((int) tot.getWidth(), (int) tot.getHeight() + ESPAIMARCADOR);
 

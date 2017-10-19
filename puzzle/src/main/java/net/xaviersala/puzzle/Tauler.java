@@ -17,7 +17,7 @@ import acm.graphics.GPoint;
 public class Tauler implements MouseListener  {
 
     /**
-     * Posicionar el marcador.
+     * Posicionar el marcador hola.
      */
     private static final int POSICIOMARCADOR  = 50;
     /**
